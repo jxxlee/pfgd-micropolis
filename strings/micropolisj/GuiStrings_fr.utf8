@@ -16,7 +16,7 @@
 PRODUCT = MicropolisJ
 main.save_query = Voulez-vous sauvegarder la ville?
 main.date_label = Date:
-main.funds_label = Fonds:
+main.funds_label = Funds:
 main.population_label = Population:
 main.error_caption = Erreur
 main.error_unexpected = Une erreur inattendue est survenue
@@ -40,7 +40,8 @@ main.about_text = <html>\
 	</html>
 cty_file = Fichier CTY
 funds = ${0,number,integer}
-citytime = {0,date,MMM yyyy}
+workers = {0,number,integer}
+citytime = {0,date,MMM DD yyyy}
 
 !
 ! Welcome screen

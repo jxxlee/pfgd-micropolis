@@ -42,6 +42,7 @@ public class MainWindow extends JFrame
 	JLabel popLbl;
 	JLabel currentToolLbl;
 	JLabel currentToolCostLbl;
+	JLabel workersLbl;
 	Map<MicropolisTool,JToggleButton> toolBtns;
 	EnumMap<MapState,JMenuItem> mapStateMenuItems = new EnumMap<MapState,JMenuItem>(MapState.class);
 	MicropolisTool currentTool;
@@ -311,6 +312,7 @@ public class MainWindow extends JFrame
 		demandInd.setEngine(engine);
 		graphsPane.setEngine(engine);
 		reloadFunds();
+		updateWorkers();
 		reloadOptions();
 		notificationPane.setVisible(false);
 
@@ -404,6 +406,12 @@ public class MainWindow extends JFrame
 		pane.add(new JLabel(strings.getString("main.population_label")), c0);
 		popLbl = new JLabel();
 		pane.add(popLbl, c1);
+		
+		c0.gridy = c1.gridy = 3;
+
+		pane.add(new JLabel(strings.getString("main.workers_label")), c0);
+		workersLbl = new JLabel();
+		pane.add(workersLbl, c1);
 
 		return pane;
 	}
@@ -1323,6 +1331,13 @@ public class MainWindow extends JFrame
 			);
 	}
 
+	public static String formatWorkers(int workers)
+	{
+		return MessageFormat.format(
+			strings.getString("workers"), workers
+			);
+	}
+	
 	public static String formatGameDate(int cityTime)
 	{
 		Calendar c = Calendar.getInstance();
@@ -1556,6 +1571,11 @@ public class MainWindow extends JFrame
 	private void reloadFunds()
 	{
 		fundsLbl.setText(formatFunds(getEngine().budget.totalFunds));
+	}
+	
+	private void updateWorkers()
+	{
+		workersLbl.setText(formatWorkers(getEngine().budget.totalWorkers));
 	}
 
 	//implements Micropolis.Listener
