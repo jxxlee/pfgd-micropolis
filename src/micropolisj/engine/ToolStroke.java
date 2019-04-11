@@ -156,8 +156,48 @@ public class ToolStroke
 			eff.toolResult(ToolResult.UH_OH);
 			return false;
 		}
-
+		
 		eff.spend(cost);
+		
+		
+		// figuring out workers based on tile number
+		// for some reason, the variable work intakes doubles it, so all worker counts are halved
+		// checks for tile number and total worker availability
+		
+		if (base == 244 && (city.budget.totalWorkers - 2 >= 0)) { // residential zone
+			city.work(1);
+		}
+		else if (base == 427 && (city.budget.totalWorkers - 2 >= 0)) { // commercial zone
+			city.work(1);
+		}
+		else if (base == 616 && (city.budget.totalWorkers - 2 >= 0)) { // commercial zone
+			city.work(1);
+		}
+		else if (base == 765 && (city.budget.totalWorkers - 4 >= 0)) { // fire station
+			city.work(2);
+		}
+		else if (base == 774 && (city.budget.totalWorkers - 4 >= 0)) { // police station
+			city.work(2);
+		}
+		else if (base == 750 && (city.budget.totalWorkers - 6 >= 0)) { // coal powerplant
+			city.work(3);
+		}
+		else if (base == 816 && (city.budget.totalWorkers - 8 >= 0)) { // nuclear powerplant
+			city.work(4);
+		}
+		else if (base == 784 && (city.budget.totalWorkers - 8 >= 0)) { // stadium
+			city.work(4);
+		}
+		else if (base == 698 && (city.budget.totalWorkers - 6 >= 0)) { // port
+			city.work(3);
+		}
+		else if (base == 716 && (city.budget.totalWorkers - 10 >= 0)) { // airport
+			city.work(5);
+		}
+		else {
+			eff.toolResult(ToolResult.INSUFFICIENT_MANPOWER);
+			return false;
+		}
 
 		int i = 0;
 		for (int rowNum = 0; rowNum < bi.height; rowNum++)

@@ -281,6 +281,7 @@ public class MainWindow extends JFrame
 		engine.addListener(this);
 		engine.addEarthquakeListener(this);
 		reloadFunds();
+		updateWorkers();
 		reloadOptions();
 		startTimer();
 		makeClean();
@@ -1313,12 +1314,14 @@ public class MainWindow extends JFrame
 			messagesPane.appendCityMessage(MicropolisMessage.BULLDOZE_FIRST);
 			citySound(Sound.UHUH, loc);
 			break;
-
 		case INSUFFICIENT_FUNDS:
 			messagesPane.appendCityMessage(MicropolisMessage.INSUFFICIENT_FUNDS);
 			citySound(Sound.SORRY, loc);
 			break;
-
+		case INSUFFICIENT_MANPOWER:
+			messagesPane.appendCityMessage(MicropolisMessage.INSUFFICIENT_MANPOWER);
+			citySound(Sound.SORRY, loc);
+			break;
 		default:
 			assert false;
 		}
@@ -1342,20 +1345,23 @@ public class MainWindow extends JFrame
 	{
 		Calendar c = Calendar.getInstance();
 		c.set(1900 + cityTime/48,
-			(cityTime%48)/4,
-			(cityTime%4)*7 + 1
-			);
-
-		return MessageFormat.format(
-			strings.getString("citytime"),
-			c.getTime()
-			);
+				(cityTime%48)/4,
+				(cityTime%4)*7+1);
+		String gameMonth = c.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.getDefault());
+		int gameDate = c.get(Calendar.DATE);
+		int gameYear = c.get(Calendar.YEAR);
+		
+		return gameMonth + " " + gameDate + " " + gameYear;
 	}
 
 	private void updateDateLabel()
 	{
 		dateLbl.setText(formatGameDate(engine.cityTime));
-
+		if (engine.cityTime % 4 == 0) {
+			engine.budget.totalWorkers = 20;
+			}
+		workersLbl.setText(formatWorkers(getEngine().budget.totalWorkers));
+		
 		NumberFormat nf = NumberFormat.getInstance();
 		popLbl.setText(nf.format(getEngine().getCityPopulation()));
 	}
@@ -1573,7 +1579,7 @@ public class MainWindow extends JFrame
 		fundsLbl.setText(formatFunds(getEngine().budget.totalFunds));
 	}
 	
-	private void updateWorkers()
+	public void updateWorkers()
 	{
 		workersLbl.setText(formatWorkers(getEngine().budget.totalWorkers));
 	}
@@ -1593,6 +1599,7 @@ public class MainWindow extends JFrame
 	public void fundsChanged()
 	{
 		reloadFunds();
+		updateWorkers();
 	}
 
 	//implements Micropolis.Listener

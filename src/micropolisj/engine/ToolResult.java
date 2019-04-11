@@ -16,5 +16,6 @@ public enum ToolResult
 	SUCCESS, // 1
 	NONE,    // 0
 	UH_OH,   // -1; invalid position
-	INSUFFICIENT_FUNDS;   // -2
+	INSUFFICIENT_FUNDS,   // -2
+	INSUFFICIENT_MANPOWER; // -3
 }

@@ -21,7 +21,8 @@ public class CityBudget
 	 * Amount of taxes collected so far in the current financial
 	 * period (in 1/TAXFREQ's).
 	 */
-	public int totalWorkers = 20;
+	public int totalWorkers;
+	
 	int taxFund;
 
 	/**

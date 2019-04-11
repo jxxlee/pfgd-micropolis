@@ -11,6 +11,8 @@ package micropolisj.engine;
 import java.io.*;
 import java.util.*;
 
+import micropolisj.gui.MainWindow;
+
 import static micropolisj.engine.TileConstants.*;
 
 /**
@@ -203,6 +205,11 @@ public class Micropolis
 	{
 		budget.totalFunds -= amount;
 		fireFundsChanged();
+	}
+	
+	public void work(int workers)
+	{
+		budget.totalWorkers -= workers;
 	}
 
 	public Micropolis()

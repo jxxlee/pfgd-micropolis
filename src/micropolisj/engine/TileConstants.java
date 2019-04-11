@@ -112,7 +112,7 @@ public class TileConstants
 	static final char HRAILROAD = 237;
 	static final char VRAILROAD = 238;
 	static final char LASTRAIL = 238;
-	static final char RESBASE = 240;
+	public static final char RESBASE = 240;
 	static final char RESCLR = 244;
 	static final char HOUSE = 249;
 	static final char LHTHR = 249;  //12 house tiles

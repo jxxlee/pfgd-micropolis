@@ -16,6 +16,7 @@ import static micropolisj.engine.TrafficGen.ZoneType;
  * In each sim cycle each tile will get activated, and this
  * class contains the activation code.
  */
+
 class MapScanner extends TileBehavior
 {
 	final B behavior;
